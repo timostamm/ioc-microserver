@@ -1,5 +1,5 @@
 {
-  "name": "timostamm/microserver",
+  "name": "timostamm/ioc-microserver",
   "type": "library",
   "require": {
     "php": "^7.1.3",
