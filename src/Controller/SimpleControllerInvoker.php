@@ -22,7 +22,14 @@ class SimpleControllerInvoker implements ControllerInvokerInterface
         foreach ($request->attributes->get('_route_params', []) as $name => $value) {
             $args[] = $value;
         }
-        $response = call_user_func_array($controller, $args);
+
+        try {
+
+            $response = call_user_func_array($controller, $args);
+
+        } catch (\Error $error) {
+            throw new LogicException(get_class($error) . ' during controller invocation: ' . $error->getMessage(), 0, $error);
+        }
 
         if (!$response instanceof Response) {
             if ($request->attributes->has('_controller')) {
